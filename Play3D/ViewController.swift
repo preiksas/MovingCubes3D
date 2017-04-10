@@ -77,8 +77,8 @@ class ViewController: UIViewController {
         scene.rootNode.addChildNode(planeNode)
         scene.rootNode.addChildNode(cubeNodeTwo)
         
-        animationMovement(cubeNode, values: (SCNVector3(x: 0, y: 0, z: 0), SCNVector3(x: 0, y: -10, z: 0)), duration: 5.0)
-
+        animationMovement(cubeNode, values: (SCNVector3(x: 0, y: 0, z: 0), SCNVector3(x: 0, y: -5, z: 0)), duration: 5.0)
+animationMovement(cubeNodeTwo, values: (SCNVector3(x: 0, y: 0, z: 0), SCNVector3(x: 0, y: 5, z: 0)), duration: 5.0)
         
         // Do any additional setup after loading the view, typically from a nib.
     }
