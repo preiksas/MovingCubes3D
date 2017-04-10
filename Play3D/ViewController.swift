@@ -69,8 +69,7 @@ class ViewController: UIViewController {
         
        
 
-         animationMovement(cubeNode)
-    
+        
         
         scene.rootNode.addChildNode(lightNode)
         scene.rootNode.addChildNode(cameraNode)
@@ -78,14 +77,17 @@ class ViewController: UIViewController {
         scene.rootNode.addChildNode(planeNode)
         scene.rootNode.addChildNode(cubeNodeTwo)
         
+        animationMovement(cubeNode, values: (SCNVector3(x: 0, y: 0, z: 0), SCNVector3(x: 0, y: -10, z: 0)), duration: 5.0)
+
+        
         // Do any additional setup after loading the view, typically from a nib.
     }
 
-    func animationMovement(_ node: SCNNode) {
-        let animation = CABasicAnimation(keyPath: "geometry:position")
-        animation.fromValue = [0.0, 0.0]
-        animation.toValue = [10.0, 10.0]
-        animation.duration = 5.0
+    func animationMovement(_ node: SCNNode,values: (SCNVector3, SCNVector3), duration: Float) {
+        let animation = CABasicAnimation(keyPath: "position")
+        animation.fromValue = values.0
+        animation.toValue = values.1
+        animation.duration = CFTimeInterval(duration)
         animation.autoreverses = true
         animation.repeatCount = .infinity
         node.addAnimation(animation, forKey: "position")
