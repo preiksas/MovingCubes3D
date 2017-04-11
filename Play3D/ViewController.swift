@@ -47,6 +47,9 @@ class ViewController: UIViewController {
         let cubeNodeTwo = SCNNode(geometry: cubeGeometryTwo)
         cubeNodeTwo.position = SCNVector3(x:0.0, y:1.0, z:0.0)
         
+        let sphereGeometry = SCNSphere(radius: 100.0)
+        let sphereNode = SCNNode(geometry: sphereGeometry)
+        
         let planeGeometry = SCNPlane(width: 100.0, height: 100.0)
         let planeNode = SCNNode(geometry: planeGeometry)
         planeNode.eulerAngles = SCNVector3(x: GLKMathDegreesToRadians(-90), y: 0, z: 0)
@@ -63,6 +66,7 @@ class ViewController: UIViewController {
         
         let skyMaterial = SCNMaterial()
         skyMaterial.diffuse.contents = #imageLiteral(resourceName: "sky")
+        sphereGeometry.materials = [skyMaterial]
         
         
         
@@ -81,6 +85,7 @@ class ViewController: UIViewController {
         scene.rootNode.addChildNode(cubeNode)
         scene.rootNode.addChildNode(planeNode)
         scene.rootNode.addChildNode(cubeNodeTwo)
+        scene.rootNode.addChildNode(sphereNode)
       
         
         animationMovement(cubeNode, values: (SCNVector3(x: 0, y: 3, z: 0), SCNVector3(x: 0, y: 0, z: 0)), duration: 3.0)
