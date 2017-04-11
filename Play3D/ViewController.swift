@@ -24,7 +24,7 @@ class ViewController: UIViewController {
         let camera = SCNCamera()
         let cameraNode = SCNNode()
         cameraNode.camera = camera
-        cameraNode.position = SCNVector3(x: -5.0, y: 5.0, z: 5.0)
+        cameraNode.position = SCNVector3(x: -8.0, y: 8.0, z: 8.0)
         
         let ambientLight = SCNLight()
         ambientLight.type = SCNLight.LightType.ambient
@@ -47,24 +47,29 @@ class ViewController: UIViewController {
         let cubeNodeTwo = SCNNode(geometry: cubeGeometryTwo)
         cubeNodeTwo.position = SCNVector3(x:0.0, y:1.0, z:0.0)
         
-        let planeGeometry = SCNPlane(width: 50.0, height: 50.0)
+        let planeGeometry = SCNPlane(width: 100.0, height: 100.0)
         let planeNode = SCNNode(geometry: planeGeometry)
         planeNode.eulerAngles = SCNVector3(x: GLKMathDegreesToRadians(-90), y: 0, z: 0)
         planeNode.position = SCNVector3(x: 0, y: -0.5, z: 0)
         
-        let redMaterial = SCNMaterial()
-        redMaterial.diffuse.contents = UIColor.red
-        cubeGeometry.materials = [redMaterial]
+        let grassMaterial = SCNMaterial()
+        grassMaterial.diffuse.contents = #imageLiteral(resourceName: "grass")
+        planeGeometry.materials = [grassMaterial]
         
-        let greenMaterial = SCNMaterial()
-        greenMaterial.diffuse.contents = UIColor.green
-        planeGeometry.materials = [greenMaterial]
+        let woodMaterial = SCNMaterial()
+        woodMaterial.diffuse.contents = #imageLiteral(resourceName: "wood")
+        cubeGeometry.materials = [woodMaterial]
+        cubeGeometryTwo.materials = [woodMaterial]
+        
+        let skyMaterial = SCNMaterial()
+        skyMaterial.diffuse.contents = #imageLiteral(resourceName: "sky")
+        
+        
         
         let constraint = SCNLookAtConstraint(target: cubeNode)
         constraint.isGimbalLockEnabled = true
         cameraNode.constraints = [constraint]
         lightNode.constraints = [constraint]
-        
        
         
        
@@ -76,9 +81,10 @@ class ViewController: UIViewController {
         scene.rootNode.addChildNode(cubeNode)
         scene.rootNode.addChildNode(planeNode)
         scene.rootNode.addChildNode(cubeNodeTwo)
+      
         
-        animationMovement(cubeNode, values: (SCNVector3(x: 0, y: 0, z: 0), SCNVector3(x: 0, y: -5, z: 0)), duration: 5.0)
-animationMovement(cubeNodeTwo, values: (SCNVector3(x: 0, y: 0, z: 0), SCNVector3(x: 0, y: 5, z: 0)), duration: 5.0)
+        animationMovement(cubeNode, values: (SCNVector3(x: 0, y: 3, z: 0), SCNVector3(x: 0, y: 0, z: 0)), duration: 3.0)
+        animationMovement(cubeNodeTwo, values: (SCNVector3(x: 0, y: 4, z: 0), SCNVector3(x: 0, y: 7, z: 0)), duration: 3.0)
         
         // Do any additional setup after loading the view, typically from a nib.
     }
@@ -93,15 +99,7 @@ animationMovement(cubeNodeTwo, values: (SCNVector3(x: 0, y: 0, z: 0), SCNVector3
         node.addAnimation(animation, forKey: "position")
     }
     
-    func animationHeight(_ node: SCNNode) {
-        let animation = CABasicAnimation(keyPath: "geometry.height")
-        animation.fromValue = 0.0
-        animation.toValue = 10.0
-        animation.duration = 10.0
-        animation.autoreverses = true
-        animation.repeatCount = .infinity
-        node.addAnimation(animation, forKey: "height")
-    }
+    
 
     
     override func didReceiveMemoryWarning() {
