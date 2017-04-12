@@ -67,6 +67,7 @@ class ViewController: UIViewController {
         let skyMaterial = SCNMaterial()
         skyMaterial.diffuse.contents = #imageLiteral(resourceName: "sky")
         sphereGeometry.materials = [skyMaterial]
+        sphereGeometry.firstMaterial?.isDoubleSided = true
         
         
         
